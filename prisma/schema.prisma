@@ -70,6 +70,22 @@ model Trip {
   userId   String
   user      User     @relation(fields: [userId], references: [id])
 
+  locations location[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model location {
+  id       String   @id @default(cuid())
+  locationTitle      String
+  lat  Float
+  lng  Float
+  
+  order    Int @default(0)
+
+  tripId    String
+  trip      Trip     @relation(fields: [tripId], references: [id])
+
+  createdAt DateTime @default(now())
 }
